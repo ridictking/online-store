@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productCategory">
+            <h2><span jhiTranslate="storeApp.productCategory.detail.title">Product Category</span> {{ productCategory.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="storeApp.productCategory.streetAddress">Street Address</span></dt>
+                <dd>
+                    <span>{{ productCategory.streetAddress }}</span>
+                </dd>
+                <dt><span jhiTranslate="storeApp.productCategory.postalCode">Postal Code</span></dt>
+                <dd>
+                    <span>{{ productCategory.postalCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="storeApp.productCategory.city">City</span></dt>
+                <dd>
+                    <span>{{ productCategory.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="storeApp.productCategory.stateProvince">State Province</span></dt>
+                <dd>
+                    <span>{{ productCategory.stateProvince }}</span>
+                </dd>
+                <dt><span jhiTranslate="storeApp.productCategory.name">Name</span></dt>
+                <dd>
+                    <span>{{ productCategory.name }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-category', productCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
