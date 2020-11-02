@@ -1,5 +1,7 @@
 package io.codewithridhwan.store.service.impl;
 
+import io.codewithridhwan.store.security.AuthoritiesConstants;
+import io.codewithridhwan.store.security.SecurityUtils;
 import io.codewithridhwan.store.service.ProductOrderService;
 import io.codewithridhwan.store.domain.ProductOrder;
 import io.codewithridhwan.store.repository.ProductOrderRepository;
@@ -38,15 +40,22 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     @Transactional(readOnly = true)
     public Page<ProductOrder> findAll(Pageable pageable) {
         log.debug("Request to get all ProductOrders");
-        return productOrderRepository.findAll(pageable);
+        if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)){
+            return productOrderRepository.findAll(pageable);
+        }else{
+            return productOrderRepository.findAllByCustomerUserLogin(SecurityUtils.getCurrentUserLogin().get(), pageable);
+        }
     }
 
 
-    @Override
     @Transactional(readOnly = true)
-    public Optional<ProductOrder> findOne(Long id) {
+    public ProductOrder findOne(Long id) {
         log.debug("Request to get ProductOrder : {}", id);
-        return productOrderRepository.findById(id);
+        if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)){
+            return productOrderRepository.findById(id).get();
+        }else{
+            return productOrderRepository.findOneByIdAndCustomerUserLogin(id,SecurityUtils.getCurrentUserLogin().get());
+        }
     }
 
     @Override

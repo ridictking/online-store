@@ -35,7 +35,7 @@ public interface ProductOrderService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<ProductOrder> findOne(Long id);
+    ProductOrder findOne(Long id);
 
     /**
      * Delete the "id" productOrder.
