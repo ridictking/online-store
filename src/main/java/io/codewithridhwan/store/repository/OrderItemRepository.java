@@ -15,5 +15,5 @@ import java.awt.print.Pageable;
 @SuppressWarnings("unused")
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
-    Page<Invoice> findAllByOrderCustomerUserLogin(String login, Pageable pageable);
+    //Page<Invoice> findAllByOrderCustomerUserLogin(String login, Pageable pageable);
 }
